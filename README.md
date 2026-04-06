@@ -1,46 +1,47 @@
-📡 Telecom Data Integration: End-to-End SSIS ETL Pipeline
-📖 Overview
-This project demonstrates a high-performance ETL (Extract, Transform, Load) pipeline designed to handle large-scale Telecom datasets. Developed using SQL Server Integration Services (SSIS), the pipeline automates the journey of raw data from flat files into a structured SQL Server environment, ensuring data quality through advanced transformations and a resilient error-handling framework.
-🏗️ Architecture & Workflow
-1. Control Flow (Orchestration)
-The pipeline is designed for scalability and automation:
+# 📡 Telecom Data ETL Pipeline using SSIS
 
-Dynamic File Processing: A Foreach Loop Container iterates through multiple source files, allowing for batch processing without manual intervention.
+## 📌 Overview
+This project implements a robust **End-to-End ETL Pipeline** designed to automate the ingestion and processing of large-scale **Telecom datasets**. 
+The system extracts raw data from flat files, applies complex business transformations, and loads cleaned data into **SQL Server**, while maintaining a strict **Error Handling** and **Auditing** framework.
 
-Operational Auditing: Custom Execute SQL Tasks (SQL_Batch and SQL_Audit) log every execution step, providing a full audit trail of the data ingestion process.
+---
 
-Automated File Lifecycle: Post-processing is handled by File System Tasks, which automatically move or archive files based on execution success.
+## ⚙️ Workflow Architecture
 
-2. Data Flow (Transformation Logic)
-The core logic focuses on data integrity and business intelligence:
+### 1️⃣ Control Flow (Orchestration)
+- **Foreach Loop Container**: Automates the processing of multiple source files dynamically in a single execution.
+- **SQL Audit & Batching**: Logs execution metadata (Start/End time, status) using `Execute SQL Tasks` (`SQL_Batch` & `SQL_Audit`).
+- **File Management**: Uses `File System Tasks` to archive or move files to designated folders after successful processing.
 
-Data Cleansing: Handles null values and inconsistencies using Derived Column transformations.
+### 2️⃣ Data Flow (Transformation)
+- **Data Cleaning**: Handling null values and standardizing formats via `Derived Column` transformations.
+- **Feature Engineering**: Advanced business logic to extract telecom attributes like **TAC** (Type Allocation Code) and **SNR** (Serial Number).
+- **Validation**: `Lookup Transformations` (`Lookup SubID`) to verify Subscriber IDs against database master tables.
+- **Monitoring**: Integration of `Row Count` components at multiple stages for real-time data throughput tracking.
 
-Feature Engineering: Extracts critical telecom attributes such as TAC (Type Allocation Code) and SNR (Serial Number) during flight.
+---
 
-Verification: Implements Lookup Transformations to validate Subscriber IDs against reference tables.
+## 🛠️ Tech Stack
+- **ETL Tool**: SQL Server Integration Services (SSIS)
+- **Database**: SQL Server (T-SQL)
+- **Environment**: Visual Studio / SQL Server Data Tools (SSDT)
+- **Storage**: OLE DB Destinations & Flat File Sources
 
-Throughput Monitoring: Multiple Row Count components track records at every stage to ensure zero data loss.
+---
 
-3. Error Handling & Governance
-To maintain pipeline stability, a "Fail-Safe" mechanism was implemented:
+## 🛡️ Error Handling & Governance
+The pipeline is designed to be **fail-safe** and resilient:
+- **Error Redirection**: Automatically redirects records that fail during data conversion or truncation.
+- **Noisy Data Management**: A dedicated staging area (`Noisy Data Base`) for invalid records, allowing the main pipeline to continue while capturing errors for manual review.
+- **Data Integrity**: Ensures 100% traceability of processed vs. rejected records through specialized error output paths.
 
-Error Redirection: Any records failing data conversion or truncation are caught and redirected.
+---
 
-Noisy Data Management: Invalid records are stored in a dedicated Noisy Data Base for asynchronous troubleshooting, preventing the entire batch from failing.
+## 📈 Project Status & Metrics
+| Component | Status | Function |
+| :--- | :--- | :--- |
+| **Control Flow** | ✅ Complete | Orchestration & Auditing |
+| **Data Flow** | ✅ Complete | Transformation & Cleaning |
+| **Error Handling** | ✅ Optimized | Redirecting Noisy Data |
+| **Logging** | ✅ Enabled | SQL-based Batch Tracking |
 
-🛠️ Tech Stack
-ETL Tool: SQL Server Integration Services (SSIS)
-
-Database: SQL Server (T-SQL)
-
-Development: Visual Studio (SSDT)
-
-Source Data: Flat Files (CSV/Text)
-
-📂 Project Highlights
-Efficiency: Automated ingestion of 10,000+ records via dynamic loops.
-
-Quality: 100% data validation using lookup and null-handling logic.
-
-Reliability: Robust error-handling framework for "noisy" datasets.
