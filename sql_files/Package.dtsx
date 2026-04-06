@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/27/2026 1:12:10 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="TRAFRAGELO"
+  DTS:CreatorName="TRAFRAGELO\YOGA"
+  DTS:DTSID="{7A322765-4CA6-4942-A6C2-A8A81E181691}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionGUID="{9E87AA0C-ED45-47CA-974E-9236DA6D747D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables />
+</DTS:Executable>
